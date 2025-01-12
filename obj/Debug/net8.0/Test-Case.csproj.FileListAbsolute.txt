@@ -161,3 +161,4 @@
 /Users/liderbektas/Desktop/MVC/Test-Case/Test-Case/obj/Debug/net8.0/Test-Case.pdb
 /Users/liderbektas/Desktop/MVC/Test-Case/Test-Case/obj/Debug/net8.0/Test-Case.genruntimeconfig.cache
 /Users/liderbektas/Desktop/MVC/Test-Case/Test-Case/obj/Debug/net8.0/ref/Test-Case.dll
+/Users/liderbektas/Desktop/MVC/Test-Case/Test-Case/obj/Debug/net8.0/Test-Case.sourcelink.json

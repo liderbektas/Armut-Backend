@@ -93,7 +93,6 @@ public class OfferController : ControllerBase
       try
       {
          var offer = await _offerService.GetFinishedOfferAsync(id);
-            
          return Ok(offer);
       }
       catch (Exception ex)

@@ -58,17 +58,14 @@ public class ServeService : IServeService
             .ToListAsync();
     }
     
-    public async Task<List<Request>> GetAcceptedRequestsAsync(int providerId)
+    public async Task<List<Offer>> GetAcceptedRequestsAsync(int userId)
     {
-        var services = await _lzContext.Services
-            .Where(s => s.ProviderId == providerId)
-            .Select(s => s.Name)
+        var acceptedOffer = await _lzContext.Offers
+            .Where(o => o.UserId == userId && o.Status == "Accepted")
+            .Include(o => o.Request)
+            .ThenInclude(r => r.User)
             .ToListAsync();
-
-        return await _lzContext.Requests
-            .Where(r => services.Contains(r.ServiceName) && r.Status == "active" && r.IsAccepted == true)
-            .Include(r => r.Details)
-            .Include(r => r.User)
-            .ToListAsync();
+        
+        return acceptedOffer;
     }
 }

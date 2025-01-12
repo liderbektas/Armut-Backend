@@ -156,9 +156,8 @@ public class OfferService
     {
         var finishedOffer = await _lzContext.Offers
             .Where(o => o.UserId == id)
-            .Include(o => o.User)
             .Include(o => o.Request)
-            .ThenInclude(r => r.Details)
+            .ThenInclude(r => r.User)
             .Where(o => o.Status == "Completed")
             .ToListAsync();
         
