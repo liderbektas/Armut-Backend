@@ -43,29 +43,4 @@ public class ServeService : IServeService
             .Where(s => s.ProviderId == providerId)
             .ToListAsync();
     }
-
-    public async Task<List<Request>> GetNotAcceptedRequestsAsync(int providerId)
-    {
-        var services = await _lzContext.Services
-            .Where(s => s.ProviderId == providerId)
-            .Select(s => s.Name)
-            .ToListAsync();
-
-        return await _lzContext.Requests
-            .Where(r => services.Contains(r.ServiceName) && r.Status == "active" && !r.IsAccepted)
-            .Include(r => r.Details)
-            .Include(r => r.User)
-            .ToListAsync();
-    }
-    
-    public async Task<List<Offer>> GetAcceptedRequestsAsync(int userId)
-    {
-        var acceptedOffer = await _lzContext.Offers
-            .Where(o => o.UserId == userId && o.Status == "Accepted")
-            .Include(o => o.Request)
-            .ThenInclude(r => r.User)
-            .ToListAsync();
-        
-        return acceptedOffer;
-    }
 }

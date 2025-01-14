@@ -9,4 +9,5 @@ public interface IRequestService
     Task<List<Request>> GetAllRequestAsync();
     Task<List<Request>> GetAllRequestByIdAsync(int id);
     Task<Request> UpdateRequestAsync(int id);
+    Task<List<Request>> GetNotAcceptedRequestsAsync(int providerId);
 }

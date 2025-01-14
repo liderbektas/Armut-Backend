@@ -92,5 +92,19 @@ namespace Test_Case.Services.Implementations
             await _lzContext.SaveChangesAsync();
             return user;
         }
+
+        public async Task<List<User>> GetAllConfirmedUserAsync()
+        {
+            return await _lzContext.Users
+                .Where(u => u.isVerified == true)
+                .ToListAsync();
+        }
+
+        public async Task<List<User>> GetAllUnApprovedUserAsync()
+        {
+            return await _lzContext.Users
+                .Where(u => u.isVerified == false)
+                .ToListAsync();
+        }
     }
 }

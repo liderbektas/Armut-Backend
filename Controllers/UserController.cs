@@ -97,4 +97,32 @@ public class UserController : ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
+    
+    [HttpGet("get-confirmed-user")]
+    public async Task<IActionResult> GetAllConfirmedUser()
+    {
+        try
+        {
+            var user = await _userService.GetAllConfirmedUserAsync();
+            return Ok(user);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
+    
+    [HttpGet("get-unapproved-user")]
+    public async Task<IActionResult> GetAllUnApprovedUser()
+    {
+        try
+        {
+            var user = await _userService.GetAllUnApprovedUserAsync();
+            return Ok(user);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
 }

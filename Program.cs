@@ -63,6 +63,7 @@ builder.Services.AddScoped<IRequestService, RequestService>();
 builder.Services.AddScoped<OfferService, OfferService>();
 builder.Services.AddScoped<IServeService, ServeService>();
 builder.Services.AddScoped<CommentService, CommentService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // DbContext kaydını yapma
 builder.Services.AddDbContext<LZ_Context>(options =>

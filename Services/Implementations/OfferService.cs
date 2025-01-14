@@ -163,5 +163,26 @@ public class OfferService
         
         return finishedOffer;
     }
+    
+    public async Task<List<Offer>> GetAcceptedRequestsAsync(int userId)
+    {
+        var acceptedOffer = await _lzContext.Offers
+            .Where(o => o.UserId == userId && o.Status == "Accepted")
+            .Include(o => o.Request)
+            .ThenInclude(r => r.User)
+            .ToListAsync();
+        
+        return acceptedOffer;
+    }
+
+    public async Task<List<Offer>> GellAllFinishOfferAsync()
+    {
+        var allFinishedOffer = await _lzContext.Offers
+            .Where(o => o.Status == "Completed")
+            .ToListAsync();
+        
+        return allFinishedOffer;
+    }
+    
 
 }

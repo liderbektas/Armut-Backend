@@ -73,4 +73,18 @@ public class RequestService : IRequestService
         
         return request;
     }
+    
+    public async Task<List<Request>> GetNotAcceptedRequestsAsync(int providerId)
+    {
+        var services = await _lzContext.Services
+            .Where(s => s.ProviderId == providerId)
+            .Select(s => s.Name)
+            .ToListAsync();
+
+        return await _lzContext.Requests
+            .Where(r => services.Contains(r.ServiceName) && r.Status == "active" && !r.IsAccepted)
+            .Include(r => r.Details)
+            .Include(r => r.User)
+            .ToListAsync();
+    }
 }

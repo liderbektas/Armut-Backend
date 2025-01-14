@@ -53,44 +53,4 @@ public class ServeController : ControllerBase
             return StatusCode(500, new { message = "Internal server error" , ex.Message });
         }
     }
-
-    [HttpGet("get-not-accepted-request/{id}")]
-    public async Task<IActionResult> GetNotAcceptedRequests(int id)
-    {
-        try
-        {
-            var requests = await _serveService.GetNotAcceptedRequestsAsync(id);
-
-            if (!requests.Any())
-            {
-                return NotFound(new { message = "No requests found" });
-            }
-            
-            return Ok(requests);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Internal server error" , ex.Message });
-        }
-    }
-    
-    [HttpGet("get-accepted-request/{id}")]
-    public async Task<IActionResult> GetAcceptedRequests(int id)
-    {
-        try
-        {
-            var requests = await _serveService.GetAcceptedRequestsAsync(id);
-
-            if (!requests.Any())
-            {
-                return NotFound(new { message = "No requests found" });
-            }
-            
-            return Ok(requests);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Internal server error" , ex.Message });
-        }
-    }
 }

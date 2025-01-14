@@ -101,4 +101,39 @@ public class OfferController : ControllerBase
 
       }
    }
+   
+   [HttpGet("get-accepted-request/{id}")]
+   public async Task<IActionResult> GetAcceptedRequests(int id)
+   {
+      try
+      {
+         var offers = await _offerService.GetAcceptedRequestsAsync(id);
+
+         if (!offers.Any())
+         {
+            return NotFound(new { message = "No requests found" });
+         }
+            
+         return Ok(offers);
+      }
+      catch (Exception ex)
+      {
+         return StatusCode(500, new { message = "Internal server error" , ex.Message });
+      }
+   }
+
+   [HttpGet("get-all-finish-offer")]
+   public async Task<IActionResult> GetAllFinishedOffers()
+   {
+      try
+      {
+         var finishedOffer = await _offerService.GellAllFinishOfferAsync();
+         return Ok(finishedOffer);
+      }
+      catch (Exception ex)
+      {
+         return StatusCode(500, new { message = "Internal server error" , ex.Message });
+      }
+   }
+   
 }

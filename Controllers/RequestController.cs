@@ -88,4 +88,24 @@ public class RequestController : ControllerBase
             return StatusCode(500, new { message = "An error occurred while updating the request.", error = ex.Message });
         }
     }
+    
+    [HttpGet("get-not-accepted-request/{id}")]
+    public async Task<IActionResult> GetNotAcceptedRequests(int id)
+    {
+        try
+        {
+            var requests = await _requestService.GetNotAcceptedRequestsAsync(id);
+
+            if (!requests.Any())
+            {
+                return NotFound(new { message = "No requests found" });
+            }
+            
+            return Ok(requests);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "Internal server error" , ex.Message });
+        }
+    }
 }

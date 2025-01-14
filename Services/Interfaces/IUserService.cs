@@ -10,5 +10,7 @@ namespace Test_Case.Services.Interfaces
         Task<User> UpdateUserAsync(int id, User model);
         Task<User> UpdatePasswordAsync(int id, string currentPassword, string newPassword);
         Task<User> AddPaymentMethodAsync(int id, User model);
+        Task<List<User>> GetAllConfirmedUserAsync();
+        Task<List<User>> GetAllUnApprovedUserAsync();
     }
 }
